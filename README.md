@@ -1,5 +1,5 @@
 # 503IT-Group-Game2
-Game Title is" Scholarship or Scam "
+Game Title is" email simulator"
 This game is designed for old aged people  (50 and above) specially from non technology background
 Group Info 
 Our group is group2 
