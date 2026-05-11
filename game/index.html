@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Inbox Defender</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="info-screen" class="screen">
+  <div class="hero-overlay"></div>
+  <div class="content-wrapper">
+    <div class="card-modern info-card">
+      <h1 class="title">🛡️ INBOX DEFENDER</h1>
+      <p class="subtitle">Learn to Detect Phishing Attacks</p>
+      
+      <div class="info-content">
+        <div class="info-section">
+          <h3 class="info-heading">❓ What is a Phishing Attack?</h3>
+          <p class="info-text">
+            Phishing is a cyber attack where criminals trick people into revealing sensitive information like passwords, credit card numbers, or personal data. 
+            Attackers impersonate trusted organizations (banks, Netflix, PayPal, etc.) through fraudulent emails, messages, or websites.
+          </p>
+        </div>
+
+        <div class="info-section">
+          <h3 class="info-heading">⚙️ How is it Done?</h3>
+          <ul class="info-list">
+            <li><strong>Spoofed Emails:</strong> Fake emails that look like they're from trusted companies</li>
+            <li><strong>Malicious Links:</strong> URLs that mimic legitimate sites but direct to fake login pages</li>
+            <li><strong>Urgent Language:</strong> "Act now!" "Verify immediately!" to pressure victims</li>
+            <li><strong>Fake Attachments:</strong> Files containing malware or data-stealing software</li>
+            <li><strong>Domain Tricks:</strong> Slight misspellings (amaz0n.com instead of amazon.com)</li>
+          </ul>
+        </div>
+
+        <div class="info-section">
+          <h3 class="info-heading">🛡️ How to Protect Yourself?</h3>
+          <ul class="info-list">
+            <li><strong>Never click suspicious links</strong> - Hover to see real URL first</li>
+            <li><strong>Verify sender email</strong> - Check if address matches official company domain</li>
+            <li><strong>Look for red flags</strong> - Poor grammar, urgent tone, generic greetings</li>
+            <li><strong>Enable 2-Factor Authentication</strong> - Adds extra security layer</li>
+            <li><strong>Keep software updated</strong> - Patches fix security vulnerabilities</li>
+            <li><strong>Trust your instinct</strong> - If something feels off, it probably is</li>
+          </ul>
+        </div>
+
+        <div class="info-section">
+          <h3 class="info-heading">🔍 How to Identify Phishing?</h3>
+          <ul class="info-list">
+            <li><strong>Mismatched URLs:</strong> Real URL doesn't match what's shown in text</li>
+            <li><strong>Grammar Errors:</strong> Typos and poor language in professional emails</li>
+            <li><strong>Requests for Info:</strong> Real companies never ask for passwords via email</li>
+            <li><strong>Generic Greetings:</strong> "Dear Customer" instead of your actual name</li>
+            <li><strong>Suspicious Sender Domain:</strong> Not the official company domain</li>
+            <li><strong>No Contact Info:</strong> Missing phone numbers or physical addresses</li>
+          </ul>
+        </div>
+      </div>
+
+      <button class="button-modern success large-button" onclick="showScreen('start-screen')">▶️ Continue to Game</button>
+    </div>
+  </div>
+</div>
+
+<div id="start-screen" class="screen hidden">
+  <div class="hero-overlay"></div>
+  <div class="content-wrapper">
+    <div class="hero-section">
+      <h1 class="title">🛡️ INBOX DEFENDER</h1>
+      <p class="subtitle">Test Your Phishing Detection Skills</p>
+    </div>
+    
+    <div class="button-container">
+      <button class="button-modern success" onclick="initializeGame()">▶️ Start Game</button>
+      <button class="button-modern primary" onclick="showScreen('info-screen')">📚 Review Info</button>
+    </div>
+  </div>
+</div>
+
+<div id="game-screen" class="screen hidden">
+  <div class="hero-overlay"></div>
+  <div class="content-wrapper">
+    <div class="game-header">
+      <div class="score-display">
+        <div class="score-value" id="score">0</div>
+        <div class="score-label">/ 100 Points</div>
+      </div>
+      <h2 class="game-title">Email: <span id="email-number">1</span> / <span id="total-emails">10</span></h2>
+      <button class="button-close" onclick="showScreen('start-screen')">✕</button>
+    </div>
+
+    <div id="inbox-container" class="inbox-modern">
+      <ul id="email-list"></ul>
+    </div>
+
+    <div id="reading-panel" class="card-modern email-reader hidden">
+      <div id="cartoon" class="cartoon"></div>
+
+      <div class="email-header">
+        <h3 id="email-subject" class="email-subject"></h3>
+        <button class="button-close" onclick="document.getElementById('reading-panel').classList.add('hidden')">✕</button>
+      </div>
+      <p id="email-body" class="email-body"></p>
+      <p id="email-link" class="email-link"></p>
+
+      <div class="actions">
+        <button class="button-modern success large" onclick="choose(true)">✓ Legitimate</button>
+        <button class="button-modern danger large" onclick="choose(false)">✗ Phishing</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="feedback-screen" class="screen hidden">
+  <div class="hero-overlay"></div>
+  <div class="content-wrapper">
+    <div class="card-modern feedback-card">
+      <div class="feedback-icon" id="feedback-icon"></div>
+      <h2 id="feedback-title" class="feedback-title"></h2>
+      <p id="feedback-reason" class="feedback-reason"></p>
+      <p id="feedback-explanation" class="feedback-explanation"></p>
+      <button class="button-modern success" id="next-btn" onclick="nextEmail()">➜ Next Email</button>
+    </div>
+  </div>
+</div>
+
+<div id="end-screen" class="screen hidden">
+  <div class="hero-overlay"></div>
+  <div class="content-wrapper">
+    <div class="card-modern end-card">
+      <div class="end-icon" id="end-icon"></div>
+      <h1 id="end-title" class="end-title"></h1>
+      <div class="end-stats">
+        <div class="stat-item">
+          <div class="stat-value" id="final-score">0</div>
+          <div class="stat-label">Final Score</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value" id="pass-mark">70</div>
+          <div class="stat-label">Pass Mark</div>
+        </div>
+      </div>
+      <p id="end-message" class="end-message"></p>
+      
+      <div id="actions-end" class="button-group">
+        <button class="button-modern success" id="replay-btn" onclick="showScreen('start-screen')">🔄 Try Again</button>
+        <button class="button-modern primary" onclick="showScreen('info-screen')">📚 Review Material</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="game.js"></script>
+</body>
+</html>
