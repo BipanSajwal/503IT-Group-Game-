@@ -32,7 +32,7 @@ Teach students how to recognise fake scholarship scams and phishing attacks.
 
 **AUDIENCE**
 
-old aged people(50 and above)
+old aged people(55 and above)
 
 **PLATFORM**
 
